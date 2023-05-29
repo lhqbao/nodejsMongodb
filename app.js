@@ -11,7 +11,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(r => app.listen(process.env.port || 3000))
     .catch(e => console.log(e));
 
-
+console.log(process.env.port);
 app.get("/", (req, res) => {
     res.sendFile("index.html", { root: __dirname });
 })
