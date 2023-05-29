@@ -8,7 +8,7 @@ var dbURI = "mongodb+srv://user:qgEEzmVngOpd03KF@atlascluster.txmdxep.mongodb.ne
 app.use(express.json());
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(r => app.listen(process.env.port))
+    .then(r => app.listen(process.env.PORT, '0.0.0.0'))// app.listen(process.env.port))
     .catch(e => console.log(e));
 
 console.log(process.env.port);
