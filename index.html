@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+     initial-scale=1.0">
+    <title>Fetch API</title>
+
+    <style>
+        label{
+            display:block;
+            margin:20px;
+        }
+
+        img{
+            width:5%;
+        }
+        
+    </style>
+
+    </head>
+
+    <body>
+        <label> Name:<input type="text" class="userName"/></label>
+        <label>Email:<input type="email" class="userEmail"/></label>
+        <label>City:<input type="text" class="userCity"/></label>
+        <button>Send data</button>
+        <div></div>
+        <script>
+
+            var button=document.querySelector("button");
+            var myName=document.querySelector(".userName");
+            var myEmail=document.querySelector(".userEmail");
+            var myCity=document.querySelector(".userCity");
+            var myDiv=document.querySelector("div");
+                
+            button.addEventListener("click",()=>{
+                
+            var obj={
+                    name:myName.value,
+                    email:myEmail.value,
+                    city:myCity.value,
+                }
+                fetch("/api",{
+                method:"POST",
+                headers:{
+                    "Content-type":"application/json",
+
+                },
+                body:JSON.stringify(obj)
+                }).then((r)=>r.json()).then((response)=>console.log(response));
+            
+            })
+
+            fetch("/api").then(r=>r.json()).then(data=>{
+                var dataDisplayed="";
+                for(var a of data.dataFound){
+                    dataDisplayed+=`<p>The name is: ${a.name}</p><p>The email is: ${a.email}</p><p>The city is: ${a.city}</p>`;
+                }
+                myDiv.innerHTML+=dataDisplayed;
+            }).catch(e=>console.log(e));
+
+        </script>
+    </body>
+</html>
